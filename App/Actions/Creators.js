@@ -1,4 +1,7 @@
 import Types from './Types'
+import enterValue from './Calculator/enterValue'
+import equals from './Calculator/equals'
+import plus from './Calculator/plus'
 
 const attemptLogin = (username, password) =>
   ({ type: Types.LOGIN_ATTEMPT, username, password })
@@ -28,5 +31,8 @@ export default {
   startup,
   requestTemperature,
   receiveTemperature,
-  receiveTemperatureFailure
+  receiveTemperatureFailure,
+  enterValue,
+  equals,
+  plus
 }

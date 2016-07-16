@@ -68,6 +68,21 @@ const ApplicationStyles = {
     borderColor: Colors.ember,
     alignItems: 'center',
     textAlign: 'center'
+  },
+  calculatorButton: {
+    flex: 0.5,
+    paddingTop: Metrics.titlePadding,
+    marginTop: 1,
+    marginBottom: 1,
+    borderWidth: 0,
+    borderColor: Colors.background,
+    borderStyle: 'solid',
+    backgroundColor: Colors.background
+  },
+  calculatorButtonText: {
+    ...Fonts.style.h4,
+    textAlign: 'center',
+    margin: Metrics.doubleBaseMargin
   }
 }
 
