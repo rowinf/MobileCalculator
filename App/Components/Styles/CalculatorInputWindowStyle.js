@@ -5,8 +5,11 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    paddingTop: 80,
     backgroundColor: Colors.charcoal,
-    margin: 1
+    margin: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
   },
   inputText: {
     textAlign: 'right',

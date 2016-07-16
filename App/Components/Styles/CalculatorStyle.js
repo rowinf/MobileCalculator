@@ -4,10 +4,12 @@ import { Colors, Metrics, ApplicationStyles } from '../../Themes/'
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Metrics.titlePadding
+    paddingTop: Metrics.titlePadding,
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   inputRow: {
-    justifyContent: 'center'
+    flex: 1
   },
   buttonGrid: {
     justifyContent: 'center',
