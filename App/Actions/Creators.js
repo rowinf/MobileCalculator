@@ -1,7 +1,4 @@
 import Types from './Types'
-import enterValue from './Calculator/enterValue'
-import equals from './Calculator/equals'
-import plus from './Calculator/plus'
 
 const attemptLogin = (username, password) =>
   ({ type: Types.LOGIN_ATTEMPT, username, password })
@@ -20,6 +17,11 @@ const requestTemperature = (city) => ({ type: Types.TEMPERATURE_REQUEST, city })
 const receiveTemperature = (temperature) => ({ type: Types.TEMPERATURE_RECEIVE, temperature })
 const receiveTemperatureFailure = () => ({ type: Types.TEMPERATURE_FAILURE })
 
+const keyPress = (payload) => ({
+  type: Types.KEY_PRESS,
+  payload
+})
+
 /**
  Makes available all the action creators we've created.
  */
@@ -32,7 +34,5 @@ export default {
   requestTemperature,
   receiveTemperature,
   receiveTemperatureFailure,
-  enterValue,
-  equals,
-  plus
+  keyPress
 }

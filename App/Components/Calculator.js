@@ -5,12 +5,12 @@ import CalculatorInputWindow from './CalculatorInputWindow'
 import CalculatorTouchable from './CalculatorTouchable'
 import CalculatorTouchablePrimary from './CalculatorTouchablePrimary'
 import CalcUtils from '../Lib/CalcUtils'
+import Actions from '../Actions/Creators'
 
 export default class Calculator extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {value: 0}
     this.numberPressed = this.numberPressed.bind(this)
   }
 
@@ -26,14 +26,15 @@ export default class Calculator extends React.Component {
   // }
 
   numberPressed (value) {
-    this.setState({value: value})
+    this.props.dispatch(Actions.keyPress(value))
   }
 
   render () {
+    const {inputValue} = this.props.calculator
     return (
       <View style={styles.container}>
         <View style={styles.inputRow}>
-          <CalculatorInputWindow value={this.state.value} />
+          <CalculatorInputWindow value={inputValue} />
         </View>
         <View style={styles.buttonGrid}>
           <View style={styles.buttonRow}>
