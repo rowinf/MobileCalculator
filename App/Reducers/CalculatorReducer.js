@@ -2,16 +2,29 @@ import Types from '../Actions/Types'
 import Immutable from 'seamless-immutable'
 import { createReducer } from 'reduxsauce'
 
+import math from 'mathjs'
+
+import CalcUtils from '../Lib/CalcUtils'
+
 export const INITIAL_STATE = Immutable({
-  inputValue: '0',
-  keyPress: '',
-  stack: []
+  expression: ''
 })
 
+export const buildExpression = (expression, key) => {
+  if (key == CalcUtils.EQUALS) {
+    return math.eval(expression)
+  }
+  else if (key == CalcUtils.AC) {
+    return ''
+  }
+  return '' + expression + key
+}
+
 const keyPress = (state, action) => {
+  const expression = buildExpression(state.expression, action.payload)
+
   return state.merge({
-    keyPress: action.payload,
-    inputValue: action.payload
+    expression
   })
 }
 

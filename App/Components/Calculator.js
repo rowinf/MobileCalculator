@@ -30,11 +30,11 @@ export default class Calculator extends React.Component {
   }
 
   render () {
-    const {inputValue} = this.props.calculator
+    const {expression} = this.props.calculator
     return (
       <View style={styles.container}>
         <View style={styles.inputRow}>
-          <CalculatorInputWindow value={inputValue} />
+          <CalculatorInputWindow value={expression} />
         </View>
         <View style={styles.buttonGrid}>
           <View style={styles.buttonRow}>

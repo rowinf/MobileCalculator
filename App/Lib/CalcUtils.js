@@ -5,8 +5,8 @@ export default class CalcUtils {
   static EQUALS = '='
   static DECIMAL = '.'
   static PLUS = '+'
-  static TIMES = '×'
-  static DIVIDED_BY = '÷'
+  static TIMES =  '*'
+  static DIVIDED_BY = '/'
   static PLUS_MINUS = '±'
   static PERCENT = '%'
 }
