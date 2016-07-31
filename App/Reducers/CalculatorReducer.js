@@ -11,13 +11,17 @@ export const INITIAL_STATE = Immutable({
 })
 
 export const buildExpression = (expression, key) => {
+  let evaluation = null
   if (key == CalcUtils.EQUALS) {
-    return math.eval(expression)
+    evaluation = math.eval(expression)
   }
   else if (key == CalcUtils.AC) {
-    return ''
+    evaluation = ''
   }
-  return '' + expression + key
+  else {
+    evaluation = expression + key
+  }
+  return '' + evaluation
 }
 
 const keyPress = (state, action) => {

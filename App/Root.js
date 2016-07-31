@@ -68,7 +68,7 @@ export default class Root extends React.Component {
           >
             <Navigator
               ref={(ref) => { this.navigator = ref }}
-              initialRoute={Routes.PresentationScreen}
+              initialRoute={Routes.CalculatorScreen}
               configureScene={Router.configureScene}
               renderScene={Router.renderScene}
               navigationBar={NavigationBar.render()}
