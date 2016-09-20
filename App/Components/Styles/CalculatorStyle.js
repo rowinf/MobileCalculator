@@ -9,17 +9,19 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   inputRow: {
-    flex: 1
+    flex: 0.4
   },
   buttonGrid: {
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    flex: 1
   },
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingLeft: 1,
-    paddingRight: 1
+    paddingRight: 1,
+    flex: 1
   },
   subduedButton: {
     backgroundColor: Colors.frost

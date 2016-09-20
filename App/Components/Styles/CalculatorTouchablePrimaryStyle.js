@@ -6,9 +6,9 @@ export default StyleSheet.create({
     ...ApplicationStyles.calculatorButton
   },
   inner: {
-    padding: 0,
-    backgroundColor: Colors.bloodOrange,
-    flex: 1
+    ...ApplicationStyles.calculatorButtonInner,
+    marginRight: 0,
+    backgroundColor: Colors.bloodOrange
   },
   innerText: {
     ...ApplicationStyles.calculatorButtonText,

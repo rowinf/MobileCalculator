@@ -82,7 +82,13 @@ const ApplicationStyles = {
   calculatorButtonText: {
     ...Fonts.style.h4,
     textAlign: 'center',
-    margin: Metrics.doubleBaseMargin
+    margin: 0
+  },
+  calculatorButtonInner: {
+    padding: 0,
+    flex: 1,
+    marginRight: 2,
+    justifyContent: 'center'
   }
 }
 

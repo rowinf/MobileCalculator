@@ -6,10 +6,8 @@ export default StyleSheet.create({
     ...ApplicationStyles.calculatorButton
   },
   inner: {
-    padding: 0,
-    backgroundColor: Colors.silver,
-    flex: 1,
-    marginRight: 2
+    ...ApplicationStyles.calculatorButtonInner,
+    backgroundColor: Colors.silver
   },
   innerText: {
     ...ApplicationStyles.calculatorButtonText
