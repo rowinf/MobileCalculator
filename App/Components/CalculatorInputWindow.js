@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Animated } from 'react-native'
 import styles from './Styles/CalculatorInputWindowStyle'
+import CalcUtils from '../Lib/CalcUtils'
 
 export default class CalculatorInputWindow extends React.Component {
 
@@ -19,29 +20,13 @@ export default class CalculatorInputWindow extends React.Component {
     value: '0'
   }
 
-  prettify (value) {
-    const nonNumeric = new RegExp(/[^\d\.\s]+/g)
-    const str = value.replace(nonNumeric, (match) => ` ${match} `)
-    return str
-  }
-
-  onlyLastNumber (value) {
-    const prettified = this.prettify(value)
-    const numerics = new RegExp(/-?[\d.\d]+/g)
-    const str = prettified.match(numerics) || ['0']
-    return str[str.length - 1]
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.value != this.props.value) {
-      Animated.timing(
-        this.state.opaque,
-        {
-          toValue: 0,
-          duration: 100
-        }
-      ).start(()=> {
-          this.state.opaque.setValue(1)
+      Animated.timing(this.state.opaque, {
+        toValue: 0,
+        duration: 100
+      }).start(()=> {
+        this.state.opaque.setValue(1)
       })
     }
   }
@@ -50,7 +35,7 @@ export default class CalculatorInputWindow extends React.Component {
     return (
       <View style={styles.container}>
         <Animated.Text style={[styles.inputText, {opacity: this.state.opaque}]}>
-          {this.onlyLastNumber(this.props.value)}
+          {CalcUtils.onlyLastNumber(this.props.value)}
         </Animated.Text>
       </View>
     )
