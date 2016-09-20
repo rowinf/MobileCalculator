@@ -1,4 +1,4 @@
-package com.rncalc;
+package com.mobilecalculator;
 
 import android.app.Application;
 import android.util.Log;

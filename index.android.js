@@ -12,4 +12,4 @@ class RNBase extends React.Component {
   }
 }
 
-AppRegistry.registerComponent('RnCalc', () => RNBase)
+AppRegistry.registerComponent('MobileCalculator', () => RNBase)
