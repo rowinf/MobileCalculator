@@ -26,13 +26,13 @@ export default class CalculatorTouchable extends React.Component {
   }
 
   render () {
-    const {children, onPress, value, growth, touchableStyles} = this.props
+    const {children, onPress, value, growth, touchableStyles, disabled} = this.props
 
     return (
       <TouchableHighlight style={[
         styles.container,
         styles[growth]
-      ]} onPress={this.whenPressed}>
+      ]} disabled={disabled} onPress={this.whenPressed}>
         <View style={[styles.inner, touchableStyles]}>
           <Text style={styles.innerText}>{value}</Text>
         </View>
