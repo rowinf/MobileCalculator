@@ -7,9 +7,14 @@ import reducer, {
   appendOperator
 } from '../../App/Reducers/CalculatorReducer'
 
+import math from 'mathjs'
 import CalcUtils from '../../App/Lib/CalcUtils'
 
 import Actions from '../../App/Actions/Creators'
+
+test('math.eval', t => {
+  t.is(math.eval('1 + -2'), -1)
+})
 
 
 test('appendDecimal', t => {
@@ -17,6 +22,7 @@ test('appendDecimal', t => {
   t.true(appendDecimal('5.') === '5.')
   t.true(appendDecimal('5.5') === '5.5')
   t.true(appendDecimal('5.5+6') === '5.5+6.')
+  t.true(appendDecimal('5.5+6.') === '5.5+6.')
 })
 
 test('appendNumber', t => {
@@ -24,19 +30,21 @@ test('appendNumber', t => {
   t.true(appendNumber('0', 0) === '0')
   t.true(appendNumber('0', 5) === '5')
   t.true(appendNumber('5', 0) === '50')
+  t.true(appendNumber('5.5', 0) === '5.50')
 })
 
 test('negateNumber', t => {
-  t.true(negateNumber('5') === '-5')
-  t.true(negateNumber('-5') === '5')
-  t.true(negateNumber('0') === '0')
+  t.is(negateNumber('5'), '-5')
+  t.is(negateNumber('-5'), '5')
+  t.is(negateNumber('0'), '0')
+  t.is(negateNumber('1 + 2'), '1 + -2')
 })
 
 test('appendOperator', t => {
-  t.is(appendOperator('3', '+'), '3+')
-  t.is(appendOperator('3+', '+'), '3+')
-  t.is(appendOperator('3+4', '+'), '3+4+')
-  t.is(appendOperator('3-', '+'), '3+')
+  t.is(appendOperator('3', '+'), '3 +')
+  t.is(appendOperator('3 +', '+'), '3 +')
+  t.is(appendOperator('3 + 4', '+'), '3 + 4 +')
+  t.is(appendOperator('3 -', '+'), '3 +')
 })
 
 test('keyPress', t => {
@@ -53,7 +61,7 @@ test('keyPress PLUS', t => {
   state = reducer(state, Actions.keyPress(3))
   state = reducer(state, Actions.keyPress(CalcUtils.PLUS))
   state = reducer(state, Actions.keyPress(4))
-  t.is(state.expression, '3+4', 'it builds an addition expression')
+  t.is(state.expression, '3 + 4', 'it builds an addition expression')
 })
 
 test('keyPress MINUS', t => {
@@ -61,7 +69,7 @@ test('keyPress MINUS', t => {
   state = reducer(state, Actions.keyPress(3))
   state = reducer(state, Actions.keyPress(CalcUtils.MINUS))
   state = reducer(state, Actions.keyPress(4))
-  t.is(state.expression, '3-4', 'it builds a subtraction expression')
+  t.is(state.expression, '3 - 4', 'it builds a subtraction expression')
 })
 
 test('keyPress DIVIDED_BY', t => {
@@ -69,7 +77,7 @@ test('keyPress DIVIDED_BY', t => {
   state = reducer(state, Actions.keyPress(3))
   state = reducer(state, Actions.keyPress(CalcUtils.DIVIDED_BY))
   state = reducer(state, Actions.keyPress(4))
-  t.is(state.expression, '3/4', 'it builds a division expression')
+  t.is(state.expression, '3 / 4', 'it builds a division expression')
 })
 
 test('keyPress TIMES', t => {
@@ -77,7 +85,7 @@ test('keyPress TIMES', t => {
   state = reducer(state, Actions.keyPress(3))
   state = reducer(state, Actions.keyPress(CalcUtils.TIMES))
   state = reducer(state, Actions.keyPress(4))
-  t.is(state.expression, '3*4', 'it builds a multiplication expression')
+  t.is(state.expression, '3 * 4', 'it builds a multiplication expression')
 })
 
 test('keyPress EQUALS', t => {

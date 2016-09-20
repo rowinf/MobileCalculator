@@ -12,20 +12,27 @@ export const INITIAL_STATE = Immutable({
 })
 
 export const negateNumber = (expression) => {
-  if (expression.indexOf('-') === -1 && expression != '0') {
-    return `-${expression}`
-  } else if (expression.indexOf('-') === 0 && expression.length > 1) {
-    return expression.slice(1)
+  let tokens = expression.split(/\s+/)
+  let last = tokens[tokens.length - 1]
+  if (last && last.indexOf('-') === -1 && last != '0') {
+    return [...tokens.slice(0, -1), `-${last}`].join(' ')
+  } else if (last && last.indexOf('-') === 0) {
+    return [...tokens.slice(0, -1), last.slice(1)].join(' ')
   } else {
     return expression
   }
 }
 
 export const appendNumber = (expression, num) => {
+  let tokens = expression.split(/\s+/)
+  let last = tokens[tokens.length - 1]
   if(expression.indexOf('0') === 0) {
-    return '' + num
+    return `${num}`
+  } else if (Number.isFinite(Number(last))) {
+    return `${expression}${num}`
+  } else {
+    return `${expression} ${num}`
   }
-  return expression += num
 }
 
 export const appendDecimal = (expression) => {
@@ -37,12 +44,12 @@ export const appendDecimal = (expression) => {
 }
 
 export const appendOperator = (expression, operator) => {
-  let endChar = expression.slice(-1)
-  let expr = expression.slice(0, -1)
-  if (Number.isInteger(Number(endChar))) {
-    return expression + operator
-  } else if (CalcUtils.isOperator(endChar)) {
-    return `${expr}${operator}`
+  let tokens = expression.split(/\s+/)
+  let last = tokens[tokens.length - 1]
+  if (Number.isFinite(Number(last))) {
+    return [...tokens, operator].join(' ')
+  } else if (CalcUtils.isOperator(last)) {
+    return [...tokens.slice(0, -1), operator].join(' ')
   } else {
     return expression
   }
