@@ -11,8 +11,18 @@ export const INITIAL_STATE = Immutable({
   resetOnNextKeyPress: false
 })
 
+export const percentToNumber = (expression) => {
+  let tokens = CalcUtils.tokenizeExpression(expression)
+  let last = tokens[tokens.length - 1]
+  if (last && last != '0') {
+    return [...tokens.slice(0, -1), `${last / 100.0}`].join(' ')
+  } else {
+    return expression
+  }
+}
+
 export const negateNumber = (expression) => {
-  let tokens = expression.split(/\s+/)
+  let tokens = CalcUtils.tokenizeExpression(expression)
   let last = tokens[tokens.length - 1]
   if (last && last.indexOf('-') === -1 && last != '0') {
     return [...tokens.slice(0, -1), `-${last}`].join(' ')
@@ -24,9 +34,11 @@ export const negateNumber = (expression) => {
 }
 
 export const appendNumber = (expression, num) => {
-  let tokens = expression.split(/\s+/)
+  let tokens = CalcUtils.tokenizeExpression(expression)
   let last = tokens[tokens.length - 1]
-  if(expression.indexOf('0') === 0) {
+  if (last.indexOf(CalcUtils.DECIMAL) > -1) {
+    return `${expression}${num}`
+  } else if (last === '0') {
     return `${num}`
   } else if (Number.isFinite(Number(last))) {
     return `${expression}${num}`
@@ -44,7 +56,7 @@ export const appendDecimal = (expression) => {
 }
 
 export const appendOperator = (expression, operator) => {
-  let tokens = expression.split(/\s+/)
+  let tokens = CalcUtils.tokenizeExpression(expression)
   let last = tokens[tokens.length - 1]
   if (Number.isFinite(Number(last))) {
     return [...tokens, operator].join(' ')
@@ -72,6 +84,8 @@ export const buildInput = ({lastKeyPressed, expression}, action) => {
     case CalcUtils.TIMES:
     case CalcUtils.DIVIDED_BY:
       return appendOperator(expression, action.payload)
+    case CalcUtils.PERCENT:
+      return percentToNumber(expression)
     default:
       return expression
   }
@@ -81,7 +95,7 @@ export const buildExpression = (state, action) => {
   switch (action.payload) {
     case CalcUtils.EQUALS:
       try {
-        return String(math.eval(state.expression))
+        return math.format(math.eval(state.expression), {precision: 14})
       } catch (e) {
         return '0'
       }

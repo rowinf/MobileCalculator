@@ -40,7 +40,7 @@ export default class Calculator extends React.Component {
           <View style={styles.buttonRow}>
             <CalculatorTouchable onPress={this.numberPressed} value={CalcUtils.AC} touchableStyles={styles.subduedButton} />
             <CalculatorTouchable onPress={this.numberPressed} value={CalcUtils.PLUS_MINUS} touchableStyles={styles.subduedButton} />
-            <CalculatorTouchable disabled onPress={this.numberPressed} value={CalcUtils.PERCENT} touchableStyles={styles.subduedButton} />
+            <CalculatorTouchable onPress={this.numberPressed} value={CalcUtils.PERCENT} touchableStyles={styles.subduedButton} />
             <CalculatorTouchablePrimary onPress={this.numberPressed} value={CalcUtils.DIVIDED_BY} />
           </View>
           <View style={styles.buttonRow}>

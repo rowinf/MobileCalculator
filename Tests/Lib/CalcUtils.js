@@ -14,3 +14,8 @@ test('onlyLastNumber', t => {
   t.is(CalcUtils.onlyLastNumber('5 - 4'), '4')
   t.is(CalcUtils.onlyLastNumber('5 - -4'), '-4')
 })
+
+test('tokenizeExpression', t => {
+  let expression = '1 + 2'
+  t.deepEqual(['1', '+', '2'], CalcUtils.tokenizeExpression(expression))
+})

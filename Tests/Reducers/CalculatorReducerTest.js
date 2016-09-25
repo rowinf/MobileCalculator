@@ -4,7 +4,9 @@ import reducer, {
   appendDecimal,
   appendNumber,
   negateNumber,
-  appendOperator
+  appendOperator,
+  tokenizeExpression,
+  percentToNumber
 } from '../../App/Reducers/CalculatorReducer'
 
 import math from 'mathjs'
@@ -26,11 +28,12 @@ test('appendDecimal', t => {
 })
 
 test('appendNumber', t => {
-  t.true(appendNumber('5', 5) === '55')
-  t.true(appendNumber('0', 0) === '0')
-  t.true(appendNumber('0', 5) === '5')
-  t.true(appendNumber('5', 0) === '50')
-  t.true(appendNumber('5.5', 0) === '5.50')
+  t.is(appendNumber('5', 5), '55')
+  t.is(appendNumber('0', 0), '0')
+  t.is(appendNumber('0', 5), '5')
+  t.is(appendNumber('5', 0), '50')
+  t.is(appendNumber('5.5', 0), '5.50')
+  t.is(appendNumber('0.', 5), '0.5')
 })
 
 test('negateNumber', t => {
@@ -54,6 +57,10 @@ test('keyPress', t => {
   state = reducer(state, Actions.keyPress(CalcUtils.DECIMAL))
   state = reducer(state, Actions.keyPress(7))
   t.is(state.expression, '34.7', 'it appends numbers and decimals')
+  state = INITIAL_STATE
+  state = reducer(state, Actions.keyPress(CalcUtils.DECIMAL))
+  state = reducer(state, Actions.keyPress(7))
+  t.is(state.expression, '0.7', 'it appends decimals')
 })
 
 test('keyPress PLUS', t => {
@@ -99,4 +106,11 @@ test('keyPress EQUALS', t => {
   t.is(state.expression, '1', 'it resets input on the next keypress')
   state = reducer(state, Actions.keyPress(2))
   t.is(state.expression, '12', 'it allows additional input thereafter')
+})
+
+test('percentToNumber', t => {
+  let expression = '2'
+  t.is('0.02', percentToNumber(expression))
+  expression = '1 + 2'
+  t.is('1 + 0.02', percentToNumber(expression))
 })

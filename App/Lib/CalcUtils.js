@@ -24,4 +24,9 @@ export default class CalcUtils {
     const matches = this.numberMatches(String(value))
     return matches[matches.length - 1]
   }
+
+
+  static tokenizeExpression (expression) {
+    return expression.split(/\s+/)
+  }
 }
