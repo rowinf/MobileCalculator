@@ -20,11 +20,10 @@ export default class CalcUtils {
     return matches
   }
 
-  static onlyLastNumber (value) {
-    const matches = this.numberMatches(String(value))
+  static onlyLastNumber (expression) {
+    const matches = this.numberMatches(String(expression))
     return matches[matches.length - 1]
   }
-
 
   static tokenizeExpression (expression) {
     return expression.split(/\s+/)

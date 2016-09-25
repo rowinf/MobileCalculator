@@ -23,8 +23,9 @@ test('appendDecimal', t => {
   t.true(appendDecimal('5') === '5.')
   t.true(appendDecimal('5.') === '5.')
   t.true(appendDecimal('5.5') === '5.5')
-  t.true(appendDecimal('5.5+6') === '5.5+6.')
-  t.true(appendDecimal('5.5+6.') === '5.5+6.')
+  t.true(appendDecimal('5.5 +') === '5.5 + 0.')
+  t.true(appendDecimal('5.5 + 6') === '5.5 + 6.')
+  t.true(appendDecimal('5.5 + 6.') === '5.5 + 6.')
 })
 
 test('appendNumber', t => {

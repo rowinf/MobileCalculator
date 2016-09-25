@@ -48,9 +48,12 @@ export const appendNumber = (expression, num) => {
 }
 
 export const appendDecimal = (expression) => {
-  let lastNum = CalcUtils.onlyLastNumber(expression)
-  if (lastNum.indexOf(CalcUtils.DECIMAL) === -1) {
-    return expression + CalcUtils.DECIMAL
+  let tokens = CalcUtils.tokenizeExpression(expression)
+  let last = tokens[tokens.length - 1]
+  if (CalcUtils.isOperator(last)) {
+    return [...tokens, `0${CalcUtils.DECIMAL}`].join(' ')
+  } else if (last.indexOf(CalcUtils.DECIMAL) === -1) {
+    return [...tokens.slice(0, -1), `${last}${CalcUtils.DECIMAL}`].join(' ')
   }
   return expression
 }
