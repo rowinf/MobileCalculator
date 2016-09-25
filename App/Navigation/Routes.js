@@ -89,8 +89,7 @@ export default new class Routes {
   get CalculatorScreen () {
     return {
       title: I18n.t('calculatorScreen'),
-      component: require('../Containers/CalculatorScreen').default,
-      leftButton: 'BACK'
+      component: require('../Containers/CalculatorScreen').default
     }
   }
 
