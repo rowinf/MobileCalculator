@@ -1,22 +1,7 @@
 #  MobileCalculator
 
-Built with React Native from the Ignite project, this is a Calculator project based on the one found in OSX.
+Built with React Native from the Ignite project, this is a Calculator project based on the basic calculator in Mac OS.
 
-## :arrow_up: How to Setup
+## Superceded
 
-**Step 1:** git clone this repo:
-
-**Step 2:** cd to the cloned repo:
-
-**Step 3:** Install the Application with `npm install`
-
-
-## :arrow_forward: How to Run App
-
-1. cd to the repo
-2. Run Build for either OS
-  * for iOS
-    * run `react-native run-ios`
-  * for Android
-    * Run Genymotion
-    * run `react-native run-android`
+This project has been superceded by a new repo using the latest React Native here: https://github.com/rowinf/MobileCalculator2
